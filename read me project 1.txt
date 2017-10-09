@@ -1,0 +1,290 @@
+
+PROJECT 1 DESCRIPTION:
+
+Write a C++ class definition called SIMPLER_TRAIN whose prototype is 
+defined as follows:
+
+  class SIMPLER_TRAIN{
+
+   public:      		// public methods for this class
+
+        SIMPLER_TRAIN(int);	// example: e(a);
+				// constructor to create an object with
+                        	// a elements and read the elements from the
+				// input file;
+
+        void SIMPLER_TRAIN_PATH(int);
+        			// example: e.SIMPLER_TRAIN_PATH(m);
+        			// list departure stations with id m;
+        			// returns no values;
+
+	void SIMPLER_TRAIN_MILES(int);
+				// example: e.SIMPLER_TRAIN_MILES(x);
+				// list all train paths longer than x;
+				// returns no values;
+
+	void SIMPLER_MAX_MIN(int); 
+        			// example: e.SIMPLER_MAX_MIN(a);
+        			// if a is -1,find the shortest distance;
+        			// if a is 1,find the longest distance;
+        			// returns int values 
+
+        void SIMPLER_DIRECT_CHECK(int,int);
+        			// example: e.SIMPLER_DIRECT_CHECK(a,b);
+        			// check if you can go from departure 
+				// station a to arrival station b;
+                        	// returns no values;    					                       	
+   private: // private var to be used by this class only (not from main)
+
+        int n;  	// number of train paths;
+        int departure[20];	// departure station no.
+        int arrival[20];	// arrival station no.
+	int miles[20];  // miles from departure station to arrival station;
+	int price[20];  // ticket price;
+   };
+
+
+The objects of SIMPLER_TRAIN class will read the input values from a 
+file called in.1 given with the following format:
+
+    departure_0   arrival_0   miles_0   price_0
+    ...
+    departure_n-1 arrival_n-1 miles_n-1 price_n-1
+
+where n (1<= n <= 20) is the number of train paths, departure_i 
+(0 <= departure_i <= 999) is the input for the ith departure station number, 
+arrival_i (0 <= arrival_i <= 999) is the input for the ith arrival station number, 
+miles_i (0 <= miles_i <= 999) is the miles for the ith train path 
+from departure_i to arrival_i, and price_i (0 <= price_i <= 9999) 
+is the price for ith train path.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example of SIMPLER_TRAIN constructor is as follows:
+
+    SIMPLER_TRAIN e(x);
+
+Which instantiates an object e of class SIMPLER_TRAIN and x is the integer
+for the number of train paths in this class.  The constructor should read the contents 
+of the in.1 file and populate the private data elements.  If there are more 
+than 1 train path, the output to out.1 is:
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM SIMPLER_TRAIN_CONSTRUCTOR:
+    	+++ SIMPLER_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
+    	+++ THERE ARE x TRAIN PATHS IN THIS SIMPLER_TRAIN OBJECT.
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+where x is the number of train paths.
+
+If there is 1 train path, the output to out.1 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM SIMPLER_TRAIN_CONSTRUCTOR:
+    	+++ SIMPLER_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
+    	+++ THERE IS x TRAIN PATH IN THIS SIMPLER_TRAIN OBJECT.
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY PATH TO out.1 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of SIMPLER_TRAIN_PATH method is as follows:
+
+     e.SIMPLER_TRAIN_PATH(m);
+
+where e is a object of class SIMPLER_TRAIN. This method should list 
+all paths with departure station m into out.1:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM SIMPLER_TRAIN_PATH METHOD:
+    	+++ DEPART: departure_m  ARRIVE: arrival_w  MILES: miles_w  PRICE: price_w 
+    	+++ DEPART: departure_m  ARRIVE: arrival_x  MILES: miles_x  PRICE: price_x  
+    	+++ ...
+    	+++ DEPART: departure_m  ARRIVE: arrival_z  MILES: miles_z  PRICE: price_z 
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+If there is no departure station with id m, the output to out.1 is:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLER_TRAIN_PATH METHOD:
+        +++ THE DEPARTURE STATION m IS:
+	+++ NOT FOUND.
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in m values, the output to out.1 is:
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM SIMPLER_TRAIN_PATH METHOD:
+	+++ INPUT ERROR.
+	+++ HAVE A NICE DAY!
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY PATH TO out.1 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of SIMPLER_TRAIN_LIST method is as follows:
+
+	e.SIMPLER_TRAIN_MILES(x);
+
+where e is a object of class SIMPLER_TRAIN and x is an integer.
+You will list the all train paths longer than x miles into
+out.1 file as follows (there is no sorting):
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM SIMPLER_TRAIN_MILES METHOD:
+	+++ THE TRAIN PATHS LONGER THAN x MILES ARE:
+	+++ DEPART: departure_w  ARRIVE: arrival_w  MILES: miles_w  
+    	+++ DEPART: departure_x  ARRIVE: arrival_x  MILES: miles_x  
+    	+++ ...
+    	+++ DEPART: departure_z  ARRIVE: arrival_z  MILES: miles_z 
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+You will list the train paths in the order that they appear in the private
+data elements (i.e., there is no sorting).
+
+If there is an error in x values, the output to out.1 is:
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM SIMPLER_TRAIN_MILES METHOD:
+	+++ INPUT ERROR.
+	+++ HAVE A NICE DAY!
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY PATH TO out.1 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+The definition of SIMPLER_MAX_MIN method is as follows:
+
+	e.SIMPLER_MAX_MIN(a);
+
+where e is a object of class SIMPLER_TRAIN and a is an integer.
+
+If a is -1, this method finds the shortest distance among the train paths
+and print the following into out.1:
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM SIMPLER_MAX_MIN METHOD:
+	+++ THE TRAIN PATH WITH SHORTEST DISTANCE:
+	+++ MILES: miles_x
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If a is 1, this method finds the longest distance among the train paths
+and print the following into out.1:
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM SIMPLER_MAX_MIN METHOD:
+	+++ THE TRAIN PATH WITH LONGEST DISTANCE:
+	+++ MILES: miles_x
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY PATH TO out.1 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_	
+	
+The definition of SIMPLER_DIRECT_CHECK method is as follows:
+
+	e.SIMPLER_DIRECT_CHECK(a, b);
+
+where e is a object of class SIMPLER_TRAIN and a and b are integers.
+
+If there is a train path that can go from station a to station b, 
+the output to out.1 is:
+	
+       	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM SIMPLER_DIRECT_CHECK METHOD:
+	+++ TRAIN PATH IS FOUND.
+	+++ DEPART: departure_a
+	+++ ARRIVE: arrival_b 
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is no such train path, the output to out.1 is:
+	
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLER_DIRECT_CHECK METHOD:
+        +++ NO SUCH TRAIN PATH.
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in a, and/or b, the output to out.1 is:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLER_DIRECT_CHECK METHOD:
+        +++ INPUT ERROR.
+        +++ HAVE A NICE DAY!
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.1 ENDS WITH A endl.
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Your header file will be used by our staff as a header file called p1.h.
+2 examples of main functions utilizing such a header are as follows:
+:::::::::::::: EXAMPLE 1 :::::::::::::::::::::
+---------CONTENTS OF main1.cc FILE:-----------
+#include <iostream>
+#include "p1.h"
+// example program: main1.cc
+int main ()
+{
+        SIMPLER_TRAIN e(4);		// instantiate an object e which is of 
+					// class SIMPLER_TRAIN 
+
+        e.SIMPLER_TRAIN_PATH(300); 	//list train paths with departure station 300
+        e.SIMPLER_TRAIN_MILES(100); 	//ist the all train paths longer than 100 miles
+        
+        return 0;
+}
+---------CONTENTS OF in.1 FILE:---------------
+200 211 60 8
+300 312 80 10
+400 413 100 10
+500 525 150 20
+---------EXPECTED CONTENTS OF out.1 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLER_TRAIN_CONSTRUCTOR:
++++ SIMPLER_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
++++ THERE ARE 4 TRAIN PATHS IN THIS SIMPLER_TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLER_TRAIN_PATH METHOD:
++++ DEPART: 300  ARRIVE: 312  MILES: 80 PRICE: 10
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLER_TRAIN_MILES METHOD:
++++ THE TRAIN PATHS LONGER THAN 100 MILES ARE:
++++ DEPART: 500 ARRIVE: 525  MILES: 150 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+:::::::::::::: EXAMPLE 2 :::::::::::::::::::::
+---------CONTENTS OF main2.cc FILE:-----------
+#include <iostream>
+#include "p1.h"
+// example program: main2.cc
+int main ()
+{
+        SIMPLER_TRAIN  e(3);		// instantiate an object e which is of 
+					// class SIMPLER_TRAIN 
+
+        e.SIMPLER_MAX_MIN(-1);		//finds the shortest distance
+        
+        e.SIMPLER_DIRECT_CHECK(400, 415);//check if there is a train path 
+        				 //that can go from the station 400 
+        				 //to the station 415,
+
+        return 0;
+}
+---------CONTENTS OF in.1 FILE:---------------
+300 312 80 10
+400 415 100 10
+500 525 150 20
+---------EXPECTED CONTENTS OF out.1 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLER_TRAIN_CONSTRUCTOR:
++++ SIMPLER_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
++++ THERE ARE 3 TRAIN PATHS IN THIS SIMPLER_TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLER_MAX_MIN METHOD:
++++ THE TRAIN PATH WITH SHORTEST DISTANCE:
++++ MILES: 80
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLER_DIRECT_CHECK METHOD:
++++ TRAIN PATH IS FOUND.
++++ DEPART: 400
++++ ARRIVE: 415
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

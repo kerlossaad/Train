@@ -1,0 +1,514 @@
+
+PROJECT 4 DESCRIPTION:
+
+Write a C++ class definition called LOADED_TRAIN whose prototype is 
+defined as follows:
+
+ class LOADED_TRAIN{
+
+   public:  
+
+        LOADED_TRAIN(int, char *);
+        		// example: LOADED_TRAIN e(x, "in_name");
+			// constructor to create an object with x elements 
+			// and read the elements from the file called in_name; 
+			     
+        LOADED_TRAIN();
+        		// example: LOADED_TRAIN e2();
+        		// second constructor;
+                        // create an object with 0 elements;
+                        
+	void LOADED_PRINT();
+			// example: e.LOADED_PRINT();
+			// print the train paths information as they appear
+			// in the private data members;
+			// return no values;
+			
+	void LOADED_SORT_STATION();  
+                        // example: e.TRAIN_SORT_STATION();
+			// sort train paths in reverse alphbetical
+			// order based on their arrival station names;
+                        // returns no values;
+        			
+	int operator == (int); 
+			// example: if (e == m)
+                        // returns 1 if the number of train paths in e is m;
+                        // returns 0 otherwise;
+	
+	int operator < (LOADED_TRAIN &);
+			// example: if (e2 < e1)
+                        // returns 1 if the number of train paths in e2 is
+                        // less than those of e1;
+                        // returns 0 otherwise;
+
+	void operator -= (int);
+			// example: e -= 5000;
+			// remove all information of the train paths with 
+			// arrival station number 5000 and update the 
+			// private data members;
+			// return no values;
+	
+	void operator += (int);
+			// example: e += 2;
+			// increment fare for each train path by 2 dollars;
+			// price[] will be modified;
+			// return no values; 
+	
+	void operator = (LOADED_TRAIN); 
+			// example: e2 = e1;
+                        // assign the elements of e1 to e2;
+                        // elements of e2 is overwritten;
+                        // e1 remains unchanged;
+                        // returns no values;
+
+	LOADED_TRAIN operator + (LOADED_TRAIN &); 
+			// example: e1+e2;
+                        // Merge the data in e1 and e2
+                        // into a temporary LOADED_TRAIN object;
+                        // return this temporary object;
+
+	
+	
+   private: // private var to be used by this class only (not from main)
+
+        int n;  	  // number of train paths;
+        int departure[20];// departure station number
+        int arrival[20]; // arrival station number
+	int miles[20];   // miles from departure station to arrival station;
+	int price[20];   // ticket price;
+	char depart_name[20][10]; // departure station names;
+	char arrive_name[20][10]; // arrival station names;
+	char in_file[10]; 	  // hold the input file name
+ };
+
+The format of any valid input file is as follows:
+
+ departure_1  arrival_1  depart_name_1  arrive_name_1   miles_1  price_1
+  ...
+ departure_n  arrival_n  depart_name_n  arrivve_name_n  miles_n  price_n 
+
+where n (1<= n <= 20) is the number of train paths, departure_i 
+(0 <= departure_i <= 999) is the input for the ith departure station number, 
+arrival_i (0 <= arrival_i <= 999) is the input for the ith arrival station 
+number, depart_name_i and arrive_name_i are the departure and arrival station 
+names of train paths (each with 9 characters max) respectively, miles_i 
+(0 <= miles_i <= 999) is the miles for the ith train path from departure_i to 
+arrival_i, price_i (0 <= price_i <= 9999) is the price for ith train path, 
+and in_file stores the input file name.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of LOADED_TRAIN constructor is as follows:
+
+	LOADED_TRAIN  e(x, "in_name");
+
+which instantiates an object e of class LOADED_TRAIN and x is the integer 
+representing the number of train paths in the input file called "in_name". 
+This method stores the input file name in the private variable called 
+in_file and then populates the private data members from this file. After 
+reading these values, the following output is written into out.4 file:
+
+ 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM LOADED_TRAIN CONSTRUCTOR:
+    	+++ n TRAIN PATHS ARE CREATED SUCCESSFULLY FROM INPUT FILE in_name.
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.4 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of LOADED_TRAIN second constructor is as follows:
+
+	LOADED_TRAIN e2;
+
+which instantiates an object e2 of class LOADED_TRAIN. There is no output to 
+out.4. You should only set n to zero since no other information is available.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of LOADED_PRINT method is as follows:
+
+	e.LOADED_PRINT();
+
+where e is a object of class LOADED_TRAIN. This method should print
+the following into out.4:
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT FROM LOADED_PRINT METHOD:
+    +++ DEPARTS: depart_name_1 ARRIVES: arrive_name_1 MILES: miles_1 FARE: price_1  
+    +++ DEPARTS: depart_name_2 ARRIVES: arrive_name_2 MILES: miles_2 FARE: price_2  
+    ...
+    +++ DEPARTS: depart_name_n ARRIVES: arrive_name_n MILES: miles_n FARE: price_n    
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.4 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of LOADED_SORT_STATION method is as follows:
+
+	e.LOADED_SORT_STATION();	
+
+where e is an object of class LOADED_TRAIN. This method will sort the train 
+paths in reverse alphbetical order based on their arrival station names;
+The output to out.4 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM SORT_TRAIN_STATION METHOD:
+        +++ TRAIN PATHS SORTED IN REVERSED ALPHABETICAL ORDER:
+        +++ DEPART: depart_name_z  ARRIVE: arrive_name_z  FARE: price_z
+	+++ DEPART: depart_name_y  ARRIVE: arrive_name_y  FARE: price_y
+	 	...
+ 	+++ DEPART: depart_name_a  ARRIVE: arrive_name_a  FARE: price_a
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+AFTER SORTING YOU WILL OVERWRITE THE ORIGINAL ORDER OF THE PRIVATE DATA ELEMENTS.
+
+MAKE SURE THAT EVERY LINE TO out.4 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ 
+
+An example use of overloaded operator == method is as follows:
+
+        e == m;
+
+where e is an object of class LOADED_TRAIN and m is an integer. This 
+overloaded operator checks if the number of train paths in e is equal to m.
+If true, it returns 1 with the following output to out.4:
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR == METHOD:
+    +++ RETURNS TRUE: THERE ARE m TRAIN PATHS. 
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If the number of train paths is not equal to m, the overloaded operator
+method returns 0.  The output to out.4 file is:
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR == METHOD:
+    +++ RETURNS FALSE: THERE ARE NOT m TRAIN PATHS. 
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+MAKE SURE THAT EVERY LINE YOUR WRITE INTO out.4 ENDS WITH endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example use of overloaded operator < method is as follows:
+
+        if (e2 < e1 )
+
+where e1 and e2 are an objects of class LOADED_TRAIN. This overloaded operator 
+checks if the number of train paths in e2 is less than the number of train paths 
+in e1. If true, it returns 1 with the following output to out.4 file:
+    
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR < METHOD:
+    +++ RETURNS TRUE. 
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If the number of train paths in e2 is not less than the number of train paths 
+in e1. the overloaded operator returns 0 with the following output to out.4 file: 
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR < METHOD:
+    +++ RETURNS FALSE. 
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE YOUR WRITE INTO out.4 ENDS WITH endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example use of overloaded operator -= method is as follows:
+	e -= arrival_i;
+
+where e is an object of class LOADED_TRAIN and arrival_i is an integer. This
+method checks if an arrival station number with arrival_i exists. If so, 
+you remove all information of the train paths with this arrival station number.
+and update the private data members. n is reduced by the number of arrival_i 
+you found in e. The output to out.4 is:
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR -= METHOD:
+    +++ ARRIVAL STATIONS arrive_name_i WITH NUMBER arrival_i ARE REMOVED.
+    +++ NOW THERE ARE m TRAIN PATHS.
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+where m is n minus the number of arrival_i in e.
+
+If this arrival station number does not exits, the output to out.4 is:
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   +++ OUTPUT OVERLOADED OPERATOR -= METHOD:
+   +++ ARRIVAL STATION WITH NUMBER arrival_i DOES NOT EXIST.
+   +++ UNABLE TO REMOVE ARRIVAL STATION WITH NUMBER arrival_i.
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in arrival_i, the output to out.4 is:
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   +++ OUTPUT OVERLOADED OPERATOR -= METHOD:
+   +++ INPUT ERROR.
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE YOUR WRITE INTO out.4 ENDS WITH endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example use of overloaded operator += method is as follows:
+	e += m;
+
+where e is an object of class LOADED_TRAIN and m is an integer representing
+increment fare for each train path. This method adds m to each element in
+price[]. price[] will be updated. The output to out.4 is:
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR += METHOD:
+    +++ INCREMENT FARE m FOR ALL TRAIN PATHS.
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE YOUR WRITE INTO out.4 ENDS WITH endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example use of overloaded operator = method is as follows:
+
+        e2 = e1;
+
+where e1 and e2 are objects of class LOADED_TRAIN.  This method copies
+private data from e1 to e2. All the previous data in e2 is overwritten.
+The private data of e1 is not changed.  The output to out.4 is:
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR = METHOD:
+    +++ n TRAIN PATHS ARE COPIED SUCCESSFULLY.
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+where n is the number of train paths in e1 (and now e2).
+
+MAKE SURE THAT EVERY LINE YOUR WRITE INTO out.4 ENDS WITH endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example use of overloaded operator + method is as follows:
+
+        e1 + e2;
+
+where e1 and e2 are objects of class LOADED_TRAIN. This method creates
+a temporary LOADED_TRAIN object and copies the train paths from e1 and e2 into
+this temporary LOADED_TRAIN object. It returns this temporary object when
+finished. The output to out.4 is:
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    +++ OUTPUT OVERLOADED OPERATOR + METHOD:
+    +++ n1 TRAIN PATHS ARE IN FIRST LOADED_TRAIN.
+    +++ n2 TRAIN PATHS ARE IN SECOND LOADED_TRAIN.
+    +++ TRAIN PATHS ARE MERGED. TOTAL NUMBER OF TRAIN PATHS IS m.
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+where m = n1 + n2  (i.e., the number of train paths from e1 and e2 added)
+The order in which the information stored in the temporary LOADED_TRAIN object 
+is e1 train paths followed by e2 train paths.  Note that the data for e1 and e2
+objects are not changed.
+
+MAKE SURE THAT EVERY LINE YOUR WRITE INTO out.4 ENDS WITH endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Your header file will be used by our staff as a header file called p4.h.
+4 examples of main functions utilizing such a header are as follows:
+:::::::::::::: EXAMPLE 1 :::::::::::::::::::::
+---------CONTENTS OF main1.cc FILE:-----------
+#include <iostream>
+#include "p4.h"
+// example program: main1.cc
+int main ()
+{
+	LOADED_TRAIN	e1(5, "in.4");
+	
+	if (e1 == 5)
+	{
+		e1.LOADED_PRINT();
+	}
+	else
+	{	
+		e1.LOADED_SORT_STATION();
+	}
+	
+     	return 0;  
+        
+}
+---------CONTENTS OF in.4 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  400  NYP  	NHV 150  40
+500  100  NYP   NBK  55  27
+400  600  NHV   NLC  40  16
+---------EXPECTED CONTENTS OF out.4 FILE:------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_TRAIN CONSTRUCTOR:
++++ 5 TRAIN PATHS ARE CREATED SUCCESSFULLY FROM INPUT FILE in.4.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT OVERLOADED OPERATOR == METHOD:
++++ RETURNS TRUE: THERE ARE 5 TRAIN PATHS. 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_PRINT METHOD:
++++ DEPARTS: YNY  ARRIVES: NRO  MILES: 50  FARE: 27
++++ DEPARTS: YNY  ARRIVES: NYP  MILES: 30  FARE: 18
++++ DEPARTS: NYP  ARRIVES: NHV  MILES: 150 FARE: 40
++++ DEPARTS: NYP  ARRIVES: NBK  MILES: 55  FARE: 27
++++ DEPARTS: NHV  ARRIVES: NLC  MILES: 40  FARE: 16
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+:::::::::::::: EXAMPLE 2 :::::::::::::::::::::
+---------CONTENTS OF main2.cc FILE:-----------
+#include <iostream>
+#include "p4.h"
+// example program: main2.cc
+int main ()
+{
+	LOADED_TRAIN	e1(5, "in.4");
+	LOADED_TRAIN	e2(5, "in.4");
+	
+	if (e2 < e1)
+	{
+		e1.LOADED_PRINT();		
+	}
+	else
+	{
+		e1.LOADED_SORT_STATION();
+	}
+	
+     	return 0;  
+        
+}
+---------CONTENTS OF in.4 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  400  NYP  	NHV 150  40
+500  100  NYP   NBK  55  27
+400  600  NHV   NLC  40  16
+---------EXPECTED CONTENTS OF out.4 FILE:------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_TRAIN CONSTRUCTOR:
++++ 5 TRAIN PATHS ARE CREATED SUCCESSFULLY FROM INPUT FILE in.4.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_TRAIN CONSTRUCTOR:
++++ 5 TRAIN PATHS ARE CREATED SUCCESSFULLY FROM INPUT FILE in.4.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT OVERLOADED OPERATOR < METHOD:
++++ RETURNS FALSE. 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SORT_TRAIN_STATION METHOD:
++++ TRAIN PATHS SORTED IN REVERSED ALPHABETICAL ORDER:
++++ DEPARTS: YNY  ARRIVES: NYP  FARE: 18
++++ DEPARTS: YNY  ARRIVES: NRO  FARE: 27
++++ DEPARTS: NHV  ARRIVES: NLC  FARE: 16	
++++ DEPARTS: NYP  ARRIVES: NHV  FARE: 40
++++ DEPARTS: NYP  ARRIVES: NBK  FARE: 27
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+:::::::::::::: EXAMPLE 3 :::::::::::::::::::::
+---------CONTENTS OF main3.cc FILE:-----------
+#include <iostream>
+#include "p4.h"
+// example program: main3.cc
+int main ()
+{
+	LOADED_TRAIN	e1(6, "in.4");
+	
+	e1 -= 400;	// remove all information of the train paths
+			// with this arrival station 400;
+	
+	e1 += 2;	// increment fare 2 for each train path;
+	
+	e1.LOADED_PRINT();
+	
+	return 0;
+}
+
+---------CONTENTS OF in.4 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  150  NYP   PJC  70  27
+500  400  NYP  	NHV  150 40
+500  100  NYP   NBK  55  27
+600  400  NLC   NHV  40  16 
+---------EXPECTED CONTENTS OF out.4 FILE:------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_TRAIN CONSTRUCTOR:
++++ 6 TRAIN PATHS ARE CREATED SUCCESSFULLY FROM INPUT FILE in.4.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT OVERLOADED OPERATOR -= METHOD:
++++ ARRIVAL STATIONS NHV WITH NUMBER 400 ARE REMOVED.
++++ NOW THERE ARE 4 TRAIN PATHS.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT OVERLOADED OPERATOR += METHOD:
++++ INCREMENT FARE 2 FOR ALL TRAIN PATHS.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_PRINT METHOD:
++++ DEPARTS: YNY  ARRIVES: NRO  MILES: 50  FARE: 29
++++ DEPARTS: YNY  ARRIVES: NYP  MILES: 30  FARE: 20
++++ DEPARTS: NYP  ARRIVES: PJC  MILES: 70  FARE: 29
++++ DEPARTS: NYP  ARRIVES: NBK  MILES: 55  FARE: 29
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+---------CONTENTS OF main4.cc FILE:-----------
+#include <iostream>
+#include "p4.h"
+// example program: main4.cc
+int main ()
+{
+        LOADED_TRAIN	e1(6, "in.4"), e2, e3;  // instantiate 2 objects: e1 and e2;
+
+  	e2 = e1;	// copies private data from e1 to e2.
+  	
+	e3 = e1 + e2;	// first + is executed, then = operator;
+
+        e3.LOADED_PRINT();  // print all train paths information;
+
+        return 0;
+}
+
+---------CONTENTS OF in.4 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  150  NYP   PJC  70  27
+500  400  NYP  	NHV  150 40
+500  100  NYP   NBK  55  27
+600  400  NLC   NHV  40  16 
+---------EXPECTED CONTENTS OF out.4 FILE:------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_TRAIN CONSTRUCTOR:
++++ 6 TRAIN PATHS ARE CREATED SUCCESSFULLY FROM INPUT FILE in.4.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT OVERLOADED OPERATOR = METHOD:
++++ 6 TRAIN PATHS ARE COPIED SUCCESSFULLY.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT OVERLOADED OPERATOR + METHOD:
++++ 6 TRAIN PATHS ARE IN FIRST LOADED_TRAIN.
++++ 6 TRAIN PATHS ARE IN SECOND LOADED_TRAIN.
++++ TRAIN PATHS ARE MERGED. TOTAL NUMBER OF TRAIN PATHS IS 12.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT OVERLOADED OPERATOR = METHOD:
++++ 12 TRAIN PATHS ARE COPIED SUCCESSFULLY.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM LOADED_PRINT METHOD:   
++++ DEPARTS: YNY  ARRIVES:  NRO  MILES: 50  FARE: 27
++++ DEPARTS: YNY  ARRIVES:  NYP  MILES: 30  FARE: 18
++++ DEPARTS: NYP  ARRIVES:  PJC  MILES: 70  FARE: 27
++++ DEPARTS: NYP  ARRIVES:  NHV  MILES: 150 FARE: 40
++++ DEPARTS: NYP  ARRIVES:  NBK  MILES: 55  FARE: 27
++++ DEPARTS: NLC  ARRIVES:  NHV  MILES: 40  FARE: 16 
++++ DEPARTS: YNY  ARRIVES:  NRO  MILES: 50  FARE: 27
++++ DEPARTS: YNY  ARRIVES:  NYP  MILES: 30  FARE: 18
++++ DEPARTS: NYP  ARRIVES:  PJC  MILES: 70  FARE: 27
++++ DEPARTS: NYP  ARRIVES:  NHV  MILES: 150 FARE: 40
++++ DEPARTS: NYP  ARRIVES:  NBK  MILES: 55  FARE: 27
++++ DEPARTS: NLC  ARRIVES:  NHV  MILES: 40  FARE: 16
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

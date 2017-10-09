@@ -1,0 +1,348 @@
+
+
+PROJECT 2 DESCRIPTION:
+
+Write a C++ class definition called SIMPLE_TRAIN whose prototype is 
+defined as follows:
+
+  class SIMPLE_TRAIN{
+
+   public:  
+
+        SIMPLE_TRAIN(int);	// example: e(x);
+			// constructor to create an object;
+                       	// with x elements and read the elements from the
+			// input file;      
+        			
+	void SIMPLE_TRAIN_LIST_PRICE(int, int);
+			// example: e.SIMPLE_TRAIN_LIST_PRICE(x, y);
+			// if x is 1, find train paths whose fares are 
+			// more than y;
+			// if x is -1, find train paths whose fares are 
+			// less than y;
+			// if x is 0, find train paths whose fares are 
+			// equal y;
+			// returns no values;
+
+	void SIMPLE_TRAIN_SORT_MILES(int);
+			// example: e.SIMPLE_TRAIN_SORT_MILES(x);
+			// if x is 1, sort train paths in ascending order 
+			// based on their distance to the destinations;
+			// if x is -1, sort train paths in descending order 
+			// based on their distance to the destinations;
+			// if x is 0, list the train paths without sorting
+			// in the order they are stored in miles[] array;
+			// returns no values;
+	
+   private: // private var to be used by this class only (not from main)
+
+        int n;  	  // number of train paths;
+        int departure[20];// departure station number
+        int arrival[20]; // arrival station number
+	int miles[20];   // miles from departure station to arrival station;
+	int price[20];   // ticket price;
+   };
+
+
+The objects of SIMPLE_TRAIN class will read the input values from a 
+file called in.2 given with the following format:
+
+    departure_0   arrival_0   miles_0   price_0
+    ...
+    departure_n-1 arrival_n-1 miles_n-1 price_n-1 
+
+where n (1<= n <= 20) is the number of train paths, departure_i 
+(0 <= departure_i <= 999) is the input for the ith departure station number, 
+arrival_i (0 <= arrival_i <= 999) is the input for the ith arrival station 
+number, miles_i (0 <= miles_i <= 999) is the miles for the ith train path 
+from departure_i to arrival_i, and price_i (0 <= price_i <= 9999) is the price 
+for ith train path.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example of SIMPLE_TRAIN constructor is as follows:
+
+    SIMPLE_TRAIN e(x);
+
+which instantiates an object e of class SIMPLE_TRAIN and x is the integer
+for the number of train paths in this class.  The constructor should read 
+the contents of the in.2 file and populate the private data elements.  
+If there are more than 1 train paths, the output to out.2 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM SIMPLE_TRAIN_CONSTRUCTOR:
+    	+++ SIMPLE_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
+    	+++ THERE ARE x TRAIN PATHS IN THIS SIMPLE_TRAIN OBJECT.
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is 1 train path, the output to out.2 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM SIMPLE_TRAIN_CONSTRUCTOR:
+    	+++ SIMPLE_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
+    	+++ THERE IS x TRAIN PATH IN THIS SIMPLE_TRAIN OBJECT.
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.2 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of SIMPLE_TRAIN_LIST_PRICE method is as follows:
+
+	e.SIMPLE_TRAIN_LIST_PRICE(x, y);
+
+where e is a object of class SIMPLE_TRAIN, and x and y are integers.
+
+If x is 1, you will find the train paths whose fares are more than y 
+and list them with the following output to out.2:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_LIST_PRICE:
+	+++ THE TRAIN PATHS WITH FARES MORE THAN y ARE:
+	+++ FARE: price_x  STATION departure_x  STATION arrival_x 
+	+++ FARE: price_y  STATION departure_y  STATION arrival_y 
+	...
+	+++ FARE: price_z  STATION departure_z  STATION arrival_z 
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        
+
+If x is -1, you will find the train paths whose fares are less than y 
+and list them with the following output to out.2:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_LIST_PRICE:
+	+++ THE TRAIN PATHS WITH FARES LESS THAN y ARE:
+	+++ FARE: price_z  STATION departure_z  STATION arrival_z 
+	+++ FARE: price_y  STATION departure_y  STATION arrival_y 
+	...
+	+++ FARE: price_x  STATION departure_x  STATION arrival_x 
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        
+If x is 0, you will find the train lines whose fares are equal to y 
+and list them with the following output to out.2:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_LIST_PRICE:
+	+++ THE TRAIN PATHS WITH FARES EQUAL TO y ARE:
+	+++ FARE: price_1  STATION departure_1  STATION arrival_1 
+	+++ FARE: price_2  STATION departure_2  STATION arrival_2 
+	...
+	+++ FARE: price_m  STATION departure_m  STATION arrival_m 
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+For x=1, 0, or -1, if there are no matching fares, the output to out.2 is:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_LIST_PRICE:
+        +++ NO TRAIN PATHS WITH MATCHING FARES ARE FOUND.
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in x and/or y values, the output to out.2 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_LIST_PRICE:
+	+++ INPUT ERROR.
+	+++ HAVE A NICE DAY!
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.2 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of SIMPLE_TRAIN_SORT_MILES method is as follows:
+
+	e.SIMPLE_TRAIN_SORT_MILES(x);
+
+where e is a object of class SIMPLE_TRAIN and x is an integer.
+
+If x is 1, you will sort the train paths in ascending order based on 
+their miles with the following output to out.2:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_SORT_MILES:
+        +++ THE TRAIN PATHS SORTED IN ASCENDING ORDER BASED ON MILES: 
+        +++ MILES: miles_a  STATION departure_a  STATION arrival_a 
+        +++ MILES: miles_b  STATION departure_b  STATION arrival_b 
+        ...
+        +++ MILES: miles_z  STATION departure_z  STATION arrival_z 
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+AFTER SORTING YOU WILL OVERWRITE THE ORIGINAL ORDER OF THE PRIVATE
+DATA ELEMENTS.  
+
+If x is -1, you will sort the train paths in descending order based
+on their miles with the following output to out.2:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_SORT_MILES:
+        +++ THE TRAIN PATHS SORTED IN DESCENDING ORDER BASED ON MILES: 
+        +++ MILES: miles_z  STATION departure_z  STATION arrival_z 
+	+++ MILES: miles_b  STATION departure_b  STATION arrival_b 
+	...
+	+++ MILES: miles_a  STATION departure_a  STATION arrival_a 
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        
+AFTER SORTING YOU WILL OVERWRITE THE ORIGINAL ORDER OF THE PRIVATE
+DATA ELEMENTS.
+
+If x is 0, you will list the train paths in the order they are in the
+private data elemets (without sorting) with the following output 
+to out.2:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_SORT_MILES:
+        +++ THE TRAIN PATHS LISTED:
+        +++ MILES: miles_0  STATION departure_0  STATION arrival_0 
+	+++ MILES: miles_1  STATION departure_1  STATION arrival_1 
+	...
+	+++ MILES: miles_n-1  STATION departure_n-1  STATION arrival_n-1 
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in x value, the output to out.2 is:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SIMPLE_TRAIN_SORT_MILES:
+        +++ INPUT ERROR.
+        +++ HAVE A NICE DAY!
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.2 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Your header file will be used by our staff as a header file called p2.h.
+4 examples of main functions utilizing such a header are as follows:
+:::::::::::::: EXAMPLE 1 :::::::::::::::::::::
+---------CONTENTS OF main1.cc FILE:-----------
+#include <iostream>
+#include "p2.h"
+// example program: main1.cc
+int main ()
+{
+        SIMPLE_TRAIN e(5); 	// instantiate an object e which is of 
+				// class SIMPLE_TRAIN 
+	e.SIMPLE_TRAIN_LIST_PRICE(1, 15); // find fares more than 15;
+        
+        return 0;
+}
+---------CONTENTS OF in.2 FILE:---------------
+200 300 60  8
+500 200 150 20
+300 400 80  10
+400 500 100 15
+500 400 101 16
+---------EXPECTED CONTENTS OF out.2 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_CONSTRUCTOR:
++++ SIMPLE_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
++++ THERE ARE 5 TRAIN PATHS IN THIS SIMPLE_TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_LIST_PRICE:
++++ THE TRAIN PATHS WITH FARES MORE THAN 15 ARE:
++++ FARE: 20  STATION 500  STATION 200
++++ FARE: 16  STATION 500  STATION 400
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+:::::::::::::: EXAMPLE 2 :::::::::::::::::::::
+---------CONTENTS OF main2.cc FILE:-----------
+#include <iostream>
+#include "p2.h"
+// example program: main2.cc
+int main ()
+{
+        SIMPLE_TRAIN e(5);      // instantiate an object e which is of
+                                // class SIMPLE_TRAIN
+        e.SIMPLE_TRAIN_LIST_PRICE(-1, 15); // find fares less than 15;
+
+        return 0;
+}
+---------CONTENTS OF in.2 FILE:---------------
+200 300 60  8
+500 200 150 20
+300 400 80  10
+400 500 100 15
+500 400 101 16
+---------EXPECTED CONTENTS OF out.2 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_CONSTRUCTOR:
++++ SIMPLE_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.
++++ THERE ARE 5 TRAIN PATHS IN THIS SIMPLE_TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_LIST_PRICE:
++++ THE TRAIN PATHS WITH FARES LESS THAN 15 ARE:
++++ FARE: 8  STATION 200  STATION 300
++++ FARE: 10  STATION 300  STATION 400
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+:::::::::::::: EXAMPLE 3 :::::::::::::::::::::
+---------CONTENTS OF main3.cc FILE:-----------
+#include <iostream>
+#include "p2.h"
+// example program: main3.cc
+int main ()
+{
+        SIMPLE_TRAIN  e(6);		// instantiate an object e which is of 
+					// class SIMPLE_TRAIN 
+	e.SIMPLE_TRAIN_SORT_MILES(1);	// sort the train paths in ascending 
+					// order based on their miles
+        return 0;
+}
+---------CONTENTS OF in.2 FILE:---------------
+200 300 60  8
+200 500 148 22
+500 200 150 20
+300 400 80  10
+400 500 100 15
+500 400 101 16
+---------EXPECTED CONTENTS OF out.2 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_CONSTRUCTOR:
++++ SIMPLE_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.
++++ THERE ARE 6 TRAIN PATHS IN THIS SIMPLE_TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_SORT_MILES:
++++ THE TRAIN PATHS SORTED IN ASCENDING ORDER BASED ON MILES:
++++ MILES: 60    STATION 200  STATION 300
++++ MILES: 80    STATION 300  STATION 400
++++ MILES: 100   STATION 400  STATION 500 
++++ MILES: 101   STATION 500  STATION 400
++++ MILES: 148   STATION 200  STATION 500 
++++ MILES: 150   STATION 500  STATION 200
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+:::::::::::::: EXAMPLE 4 :::::::::::::::::::::
+---------CONTENTS OF main4.cc FILE:-----------
+#include <iostream>
+#include "p2.h"
+// example program: main4.cc
+int main ()
+{
+        SIMPLE_TRAIN  e(6);             // instantiate an object e which is of
+                                        // class SIMPLE_TRAIN
+        e.SIMPLE_TRAIN_SORT_MILES(-1);  // sort the train paths in descending 
+                                        // order based on their miles
+        return 0;
+}
+---------CONTENTS OF in.2 FILE:---------------
+200 300 60  8
+200 500 148 22
+500 200 150 20
+300 400 80  10
+400 500 100 15
+500 400 101 16
+---------EXPECTED CONTENTS OF out.2 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_CONSTRUCTOR:
++++ SIMPLE_TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.
++++ THERE ARE 6 TRAIN PATHS IN THIS SIMPLE_TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SIMPLE_TRAIN_SORT_MILES:
++++ THE TRAIN PATHS SORTED IN DESCENDING ORDER BASED ON MILES:
++++ MILES: 150   STATION 500  STATION 200
++++ MILES: 148   STATION 200  STATION 500 
++++ MILES: 101   STATION 500  STATION 400 
++++ MILES: 100   STATION 400  STATION 500 
++++ MILES: 80    STATION 300  STATION 400
++++ MILES: 60    STATION 200  STATION 300 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,0 +1,441 @@
+
+PROJECT 3 DESCRIPTION:
+
+Write a C++ class definition called TRAIN whose prototype is 
+defined as follows:
+
+ class TRAIN{
+
+   public:  
+
+     	TRAIN(int);	// example: e(x);
+			// constructor to create an object;
+                  	// with x elements and read the elements from the
+			// input file;      
+        					
+	void FIND_DIRECT_TRAIN_FARE(char *, char *);
+			// example: e. FIND_DIRECT_TRAIN_FARE("NYP, "NBK");
+			// find fare for the direct train path whose 
+			// departure station is NYP and arrival station is NBK;
+			// returns no values;
+
+	void FIND_DIRECT_TRAIN_MILES(char *, int);
+			// example: e.FIND_DIRECT_TRAIN_MILES ("NYP", x);
+			// if x dollar is spent, find miles for the direct train
+			// paths whose departure station is "NYP";
+			// returns no values;
+
+	void SORT_TRAIN_STATION(int);
+			// example: e.SORT_TRAIN_STATION (x);
+			// if x is 1, sort train destinations in alphbetical order;
+			// if x is 0, list the train paths without sorting;
+			// returns no values;
+						
+	void TRAIN_LIST(int, int);
+			// example: e.TRAIN_LIST(x, m);
+			// if x=1, list the train paths whose miles are 
+			// more than m in alphabetical order based on 
+			// their names of destinations;;
+			// if x is -1, list the train paths whose miles are 
+			// less than m in alphabetical order based on 
+			// their names of destinations;
+			// if x is 0, list the train paths whose miles are 
+			// equal to m in alphabetical order based on their 
+			// destinations;
+			// returns no values;
+
+   private: // private var to be used by this class only (not from main)
+
+      	int n;  	  	// number of train paths;
+      	int departure[20];	// departure station number
+      	int arrival[20]; 	// arrival station number
+	int miles[20];   	// miles from departure station to arrival station;
+	int price[20];   	// ticket price;
+	char depart_name[20][10]; // departure station names;
+	char arrive_name[20][10]; // arrival station names;
+ };
+
+
+The objects of TRAIN class will read the input values from a 
+file called in.3 given with the following format:
+
+ departure_0   arrival_0   depart_name_0   arrive_name_0    miles_0   price_0
+ ...
+ departure_n-1 arrival_n-1 depart_name_n-1 arrive_name_n-1 miles_n-1 price_n-1 
+
+where n (1<= n <= 20) is the number of train paths, departure_i 
+(0 <= departure_i <= 999) is the input for the ith departure station number, 
+arrival_i (0 <= arrival_i <= 999) is the input for the ith arrival station 
+number, depart_name_i and arrive_name_i are the ith departure and ith arrival 
+station names of ith train path (each with 9 characters maximum) respectively, 
+miles_i (0 <= miles_i <= 999) is the miles for the ith train path from departure_i 
+to arrival_i, and price_i (0 <= price_i <= 9999) is the price for ith train path.
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+An example of TRAIN constructor is as follows:
+
+	TRAIN e(x);
+
+which instantiates an object e of class TRAIN and x is the integer
+for the number of train paths in this class.  The constructor should read 
+the contents of the in.3 file and populate the private data elements.  
+
+If there are more than 1 train paths, the output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM TRAIN_CONSTRUCTOR:
+    	+++ TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
+    	+++ THERE ARE x TRAIN PATHS IN THIS TRAIN OBJECT.
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is 1 train path, the output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    	+++ OUTPUT FROM TRAIN_CONSTRUCTOR:
+    	+++ TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
+    	+++ THERE IS x TRAIN PATH IN THIS TRAIN OBJECT.
+    	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.3 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of FIND_DIRECT_TRAIN_FARE method is as follows:
+
+	 e.FIND_DIRECT_TRAIN_FARE(depart_name_x, arrive_name_x);
+
+where e is an object of class TRAIN, and depart_name_x and arrive_name_x 
+are strings.
+
+You will find fare for the direct train path whose departure station 
+is depart_name_x and arrival station is arrive_name_x with the following 
+output to out.3:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM FIND_DIRECT_TRAIN_FARE:
+	+++ FROM STATION depart_name_x (NO. departure_x) 
+	+++ TO STATION arrive_name_x (NO. arrival_x)
+	+++ FARE IS price_x.
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there are no matching names of stations depart_name_x and/or arrive_name_x, 
+the output to out.3 is:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM FIND_DIRECT_TRAIN_FARE:
+        +++ NO TRAIN PATHS WITH MATCHING STATIONS ARE FOUND.
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in depart_name_x and/or arrive_name_x values, the output 
+to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM FIND_DIRECT_TRAIN_FARE:
+	+++ INPUT ERROR.
+	+++ HAVE A NICE DAY!
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.3 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+The definition of FIND_DIRECT_TRAIN_MILES method is as follows:
+
+	 e.FIND_DIRECT_TRAIN_MILES(depart_name_x, price_x);
+
+where e is an object of class TRAIN, and depart_name_x is a string and 
+price_x is an integer.
+
+For each path in the system, if the departure name is depart_name_x and the
+ticket price is price_x, you list them as follows into out.3 file:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM FIND_DIRECT_TRAIN_MILES:
+	+++ FARE: price_x
+	+++ TRAVEL miles_x MILES FROM DEPARTURE STATION depart_name_x
+	+++ TRAVEL miles_y MILES FROM DEPARTURE STATION depart_name_x
+	...
+	+++ TRAVEL miles_z MILES FROM DEPARTURE STATION depart_name_x
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there are no matching names for depart_name_x and/or no matching 
+ticket price price_x, the output to out.3 is:
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM FIND_DIRECT_TRAIN_MILES:
+        +++ DEPARTURE STATION depart_name_x WITH FARE price_x
+        +++ NO SUCH TRAIN PATHS ARE FOUND.
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in depart_name_x and/or price_x values, the output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM FIND_DIRECT_TRAIN_MILES:
+	+++ INPUT ERROR.
+	+++ HAVE A NICE DAY!
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.3 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The definition of SORT_TRAIN_STATION method is as follows:
+
+	e.SORT_TRAIN_STATION(x);
+
+where e is an object of class TRAIN and x is an integer.
+
+If x is 1, you will sort the train paths in alphabetical order based on
+their destination names (i.e., arrive_name). The output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SORT_TRAIN_STATION:
+        +++ TRAIN PATHS SORTED IN ALPHABETICAL ORDER:
+        +++ DEPART: depart_name_a (NO. departure_a) ARRIVE: arrive_name_a (NO. arrival_a)
+	+++ DEPART: depart_name_b (NO. departure_b) ARRIVE: arrive_name_b (NO. arrival_b)
+	...
+	+++ DEPART: depart_name_z (NO. departure_z) ARRIVE: arrive_name_z (NO. arrival_z)
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+AFTER SORTING YOU WILL OVERWRITE THE ORIGINAL ORDER OF THE PRIVATE DATA ELEMENTS.
+
+If x is 0, you will list the train paths without sorting, in the order that
+they are stored in the private data arrays. The output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SORT_TRAIN_STATION:
+        +++ TRAIN PATHS LISTED:
+        +++ DEPART: depart_name_1 (NO. departure_1) ARRIVE: arrive_name_1 (NO. arrival_1)
+	+++ DEPART: depart_name_2 (NO. departure_2) ARRIVE: arrive_name_2 (NO. arrival_2)
+	...
+	+++ DEPART: depart_name_n (NO. departure_n) ARRIVE: arrive_name_n (NO. arrival_n)
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+If there is an error in x value, the output to out.3 is:    
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM SORT_TRAIN_STATION:
+	+++ INPUT ERROR.
+	+++ HAVE A NICE DAY!
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.3 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_        
+
+The definition of TRAIN_LIST method is as follows:
+
+	 e.TRAIN_LIST(x, m);
+
+where e is an object of class TRAIN, and x and m are integers.
+
+If x is 1, list the train paths whose miles are more than m in alphabetical order 
+based on their names of destinations (i.e, arrive_name). The output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM TRAIN_LIST:     
+	+++ TRAIN PATHS SORTED IN ALPHABETICAL ORDER:
+	+++ THE TRAIN PATHS WITH MILES MORE THAN m ARE
+	+++ DEPART: depart_name_a (NO: departure_a) ARRIVE: arrive_name_a (NO: arrival_a)
+	+++ DEPART: depart_name_b (NO: departure_b) ARRIVE: arrive_name_b (NO: arrival_b)
+	...
+	+++ DEPART: depart_name_z (NO: departure_z) ARRIVE: arrive_name_z (NO: arrival_z)
+ 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+AFTER SORTING YOU WILL OVERWRITE THE ORIGINAL ORDER OF THE PRIVATE DATA ELEMENTS.
+
+If x is -1, list the train paths whose miles are less than m in alphabetical order based 
+on their names of destinations. The output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM TRAIN_LIST:     
+	+++ TRAIN PATHS SORTED IN ALPHABETICAL ORDER:
+	+++ THE TRAIN PATHS WITH MILES LESS THAN m ARE
+	+++ DEPART: depart_name_a (NO: departure_a) ARRIVE: arrive_name_a (NO: arrival_a)
+	+++ DEPART: depart_name_b (NO: departure_b) ARRIVE: arrive_name_b (NO: arrival_b)
+	...
+	+++ DEPART: depart_name_z (NO: departure_z) ARRIVE: arrive_name_z (NO: arrival_z)
+ 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+AFTER SORTING YOU WILL OVERWRITE THE ORIGINAL ORDER OF THE PRIVATE DATA ELEMENTS.
+ 
+If x is 0, list the train paths whose miles are equal to m in alphabetical order based 
+on their destinations. The output to out.3 is:	
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+++ OUTPUT FROM TRAIN_LIST:     
+	+++ TRAIN PATHS SORTED IN ALPHABETICAL ORDER:
+	+++ THE TRAIN PATHS WITH MILES EQUAL TO m ARE
+	+++ DEPART: depart_name_a (NO: departure_a) ARRIVE: arrive_name_a (NO: arrival_a)
+	+++ DEPART: depart_name_b (NO: departure_b) ARRIVE: arrive_name_b (NO: arrival_b)
+	...
+	+++ DEPART: depart_name_z (NO: departure_z) ARRIVE: arrive_name_z (NO: arrival_z)
+ 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 	
+AFTER SORTING YOU WILL OVERWRITE THE ORIGINAL ORDER OF THE PRIVATE DATA ELEMENTS.  
+
+If there is an error in x and/or m values, the output to out.3 is:
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        +++ OUTPUT FROM TRAIN_LIST_PRICE:
+	+++ INPUT ERROR.
+	+++ HAVE A NICE DAY!
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+MAKE SURE THAT EVERY LINE TO out.3 ENDS WITH A endl.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Your header file will be used by our staff as a header file called p3.h.
+4 examples of main functions utilizing such a header are as follows:
+
+:::::::::::::: EXAMPLE 1 :::::::::::::::::::::
+---------CONTENTS OF main1.cc FILE:-----------
+#include <iostream>
+#include "p3.h"
+// example program: main1.cc
+int main ()
+{
+      TRAIN e(5);
+      e.FIND_DIRECT_TRAIN_FARE("YNY", "NYP");	//find fare from YNY to NYP
+      return 0;  
+        
+}
+---------CONTENTS OF in.3 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  400  NYP  	NHV 150  40
+500  100  NYP   NBK  55  27
+400  600  NHV   NLC  40  16
+---------EXPECTED CONTENTS OF out.3 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM TRAIN_CONSTRUCTOR:
++++ TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
++++ THERE ARE 5 TRAIN PATHS IN THIS TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM FIND_DIRECT_TRAIN_FARE:
++++ FROM STATION YNY (NO. 200) 
++++ TO STATION NYP (NO. 500)
++++ FARE IS 18.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+:::::::::::::: EXAMPLE 2 :::::::::::::::::::::
+---------CONTENTS OF main2.cc FILE:-----------
+#include <iostream>
+#include "p3.h"
+// example program: main2.cc
+int main ()
+{
+	TRAIN e(6);
+	e.FIND_DIRECT_TRAIN_MILES("NYP", 27);	// ticket fare 27, find miles for the direct train paths 
+						// whose departure station is NYP
+	return 0;
+	        
+}
+---------CONTENTS OF in.3 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  150  NYP   PJC  70  27
+500  400  NYP  	NHV 150  40
+500  100  NYP   NBK  55  27
+400  600  NHV   NLC  40  16
+---------EXPECTED CONTENTS OF out.3 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM TRAIN_CONSTRUCTOR:
++++ TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
++++ THERE ARE 6 TRAIN PATHS IN THIS TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM FIND_DIRECT_TRAIN_MILES:
++++ FARE: 27
++++ TRAVEL 70 MILES FROM DEPARTURE STATION NYP
++++ TRAVEL 55 MILES FROM DEPARTURE STATION NYP
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+:::::::::::::: EXAMPLE 3 :::::::::::::::::::::
+---------CONTENTS OF main3.cc FILE:-----------
+#include <iostream>
+#include "p3.h"
+// example program: main3.cc
+int main ()
+{	
+	TRAIN e(6);
+	e.SORT_TRAIN_STATION(1);	//sort the train paths in alphabetical order
+					// based on their destination names
+	e.SORT_TRAIN_STATION(0);	//list the train paths without sorting
+	return 0;
+	
+         
+}
+---------CONTENTS OF in.3 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  150  NYP   PJC  70  27
+500  400  NYP  	NHV 150  40
+500  100  NYP   NBK  55  27
+400  600  NHV   NLC  40  16 
+---------EXPECTED CONTENTS OF out.3 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM TRAIN_CONSTRUCTOR:
++++ TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
++++ THERE ARE 6 TRAIN PATHS IN THIS TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SORT_TRAIN_STATION:
++++ TRAIN PATHS SORTED IN ALPHABETICAL ORDER:
++++ DEPART: NYP (NO. 500) ARRIVE: NBK (NO. 100)
++++ DEPART: NYP (NO. 500) ARRIVE: NHV (NO. 400)
++++ DEPART: NHV (NO. 400) ARRIVE: NLC (NO. 600)
++++ DEPART: YNY (NO. 200) ARRIVE: NRO (NO. 300)
++++ DEPART: YNY (NO. 200) ARRIVE: NYP (NO. 500)
++++ DEPART: NYP (NO. 500) ARRIVE: PJC (NO. 150)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM SORT_TRAIN_STATION:
++++ TRAIN PATHS LISTED:
++++ DEPART: NYP (NO. 500) ARRIVE: NBK (NO. 100)
++++ DEPART: NYP (NO. 500) ARRIVE: NHV (NO. 400)
++++ DEPART: NHV (NO. 400) ARRIVE: NLC (NO. 600)
++++ DEPART: YNY (NO. 200) ARRIVE: NRO (NO. 300)
++++ DEPART: YNY (NO. 200) ARRIVE: NYP (NO. 500)
++++ DEPART: NYP (NO. 500) ARRIVE: PJC (NO. 150)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+:::::::::::::: EXAMPLE 4 :::::::::::::::::::::
+---------CONTENTS OF main4.cc FILE:-----------
+#include <iostream>
+#include "p3.h"
+// example program: main4.cc
+int main ()
+{
+	TRAIN e(6);
+	e.TRAIN_LIST(1, 50);	//list the train paths whose miles are more than 50 
+				//in alphabetical order based on their names of 
+				//destinations
+	return 0;
+        
+}
+---------CONTENTS OF in.3 FILE:---------------
+200  300  YNY   NRO  50  27
+200  500  YNY   NYP  30  18
+500  150  NYP   PJC  70  27
+500  400  NYP  	NHV 150  40
+500  100  NYP   NBK  55  27
+400  600  NHV   NLC  40  16
+---------EXPECTED CONTENTS OF out.3 FILE:-----
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM TRAIN_CONSTRUCTOR:
++++ TRAIN CONSTRUCTOR SUCCESSFULLY INITIATED AN OBJECT.   	
++++ THERE ARE 6 TRAIN PATHS IN THIS TRAIN OBJECT.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ OUTPUT FROM TRAIN_LIST:     
++++ TRAIN PATHS SORTED IN ALPHABETICAL ORDER:
++++ THE TRAIN PATHS WITH MILES MORE THAN 50 ARE
++++ DEPART: NYP (NO. 500) ARRIVE: NBK (NO. 100)
++++ DEPART: NYP (NO. 500) ARRIVE: NHV (NO. 400)
++++ DEPART: NYP (NO. 500) ARRIVE: PJC (NO. 150)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
